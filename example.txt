@@ -1,2 +1,3 @@
-Przykładowe tekst! Przykładowe zdanie.
-Pytanie? Pytania @ czy to jest zdanie
+To jest mój przykładowy nowy tekst.
+To jest przykładowy tekst zakończony pytaniem? Wykrzycznikiem!
+A czy to jest nowe zdanie, skoro nie ma kropki
