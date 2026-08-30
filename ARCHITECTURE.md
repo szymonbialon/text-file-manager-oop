@@ -1,56 +1,35 @@
-# Pomysł na uogólnienie klasy
+# Pomysły na dalszy rozwój tego programu
 
-Obecnie `TextFileManager` robi kilka rzeczy naraz:
-- zna ścieżkę do pliku,
-- czyta plik,
-- zapisuje plik,
-- dopisuje tekst,
-- liczy słowa,
-- liczy zdania.
+## 1
 
+## feature/analysis-and-result
 
-# 1  Done
-Pierwszy pomysł na uogólnienie to **oddzielenie operacji na pliku od analizy tekstu**.
+Mogę rozszerzyć moduł z analizą o dodatkowe metody w text_analyzer, np.:
 
-Analiza tekstu nie musi być na stałe związana z plikiem, bo ten sam tekst może 
-pochodzić z różnych źródeł, na przykład:
-- z pliku,
-- z tekstu wpisanego ręcznie,
-- z bazy danych,
+- `unique_word_count: int`
+- `longest_word: str | None`
+- `average_word_length: float`
+- `most_common_words: list[tuple[str, int]]`
 
-Dlatego można rozważyć podział na dwie role:
+oczywiście z testami do każdej z metod.
 
-- `TextFileManager` - odpowiada za odczyt i zapis tekstu w pliku,
-- `TextAnalyzer` - odpowiada za analizę dowolnego tekstu.
+## 2
 
-W takim podejściu `TextFileManager` mógłby korzystać z `TextAnalyzer`, 
-ale sama analiza tekstu nie byłaby przywiązana do pliku.
+- Dodać klasę `TextReport` w paczce analysis:
+  - przechowanie podsumowania wszystkich statystyk w jednym obiekcie
 
+`TextReport`:
 
-# 2 Done
-Na dalszym etapie można też rozważyć typy generyczne w `TextFileManager`, ale raczej dopiero wtedy, 
-gdy klasa miałaby obsługiwać nie tylko zwykły tekst, ale też inne formaty danych i zwracać różne typy wyników, 
-np. `str` dla tekstu, `dict` dla JSON albo listę rekordów dla CSV.
+- `word_count: int`
+- `sentence_count: int`
+- `unique_word_count: int`
+- `longest_word: str | None`
+- `average_word_length: float`
+- `most_common_words: list[tuple[str, int]]`
 
-# Kolejne pomysły na rozwój skryptu 
-
-# 3
-## feature/text-cleaning
-- Klasa `TextCleaner` lub metody w `TextAnalyzer`:
-  - `_clean_words()`
-  - `remove_extra_whitespace()`
-
-# 4
-## feature/text-statistics
 - Klasa `TextAnalyzer`:
-  - `count_unique_words()`
-  - `get_longest_word()`
-  - `get_average_word_length()`
-  - `get_most_common_words()`
+  - `analyze_all()` metoda zwróci gotowy obiekt `TextReport`
 
-# 5
-## feature/analysis-result
-- Klasa `TextReport`:
-  - przechowanie podsumowania wszystkich statystyk w jednym obiekcie i zapis do pliku
-- Klasa `TextAnalyzer`:
-  - `analyze_all()` (zwraca gotowy obiekt `TextReport`)
+## 3
+
+- Zapis danych z `TextReport` do pliku (najpewniej w jeszcze jednej paczce `report`).
